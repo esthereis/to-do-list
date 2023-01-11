@@ -8,7 +8,8 @@ import {
   List,
   Checkbox,
   ItemList,
-  EditIcon
+  EditIcon,
+  InputEdit
 } from './styles';
 import edit from '../.././edit.svg';
 
@@ -17,7 +18,9 @@ const Form = () => {
     let savedTasks = localStorage.getItem('tasks');
 
     if (savedTasks) {
-      return JSON.parse(localStorage.getItem('tasks'));
+      return JSON.parse(savedTasks);
+    } else {
+      return [];
     }
   };
 
@@ -34,18 +37,32 @@ const Form = () => {
         <Input
           type='text'
           placeholder='Add a task...'
+          value={newTask}
           onChange={e => setNewTask(e.target.value)}
+          onKeyDown={e => {
+            if (e.code === 'Enter') {
+              setTasks([...tasks, newTask]);
+              setNewTask('');
+            }
+          }}
+
           // onKeyPress={() => setTasks([...tasks, newTask])}
         ></Input>
-        <AddButton onClick={() => setTasks([...tasks, newTask])}>Add</AddButton>
+        <AddButton
+          onClick={() => {
+            setTasks([...tasks, newTask]);
+            setNewTask('');
+          }}
+        >
+          Add
+        </AddButton>
       </InputContainer>
       <BoxList>
         <List>
           {tasks.map((task, index) => (
-            <ItemList key={task + index}>
+            <ItemList key={task + index} onClick={() => <InputEdit />}>
               <Checkbox
                 type='checkbox'
-                //onClick={task => setNewTask(...tasks.splice(task))}
                 onClick={() => {
                   const filteredList = tasks.filter(item => item !== task);
                   setTasks(filteredList);

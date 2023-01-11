@@ -76,13 +76,24 @@ export const List = styled.ul`
 
 export const Checkbox = styled.input``;
 
+export const EditIcon = styled.img`
+  margin-left: auto;
+
+  height: 50%;
+  visibility: hidden;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 export const ItemList = styled.li`
-  width: 21.5rem;
+  width: 21rem;
   height: 2rem;
-  padding: 0.15rem;
+  padding: 0.15rem 0.5rem;
 
   display: flex;
-  // gap: 0.25rem;
+  gap: 0.25rem;
 
   align-items: center;
 
@@ -97,15 +108,12 @@ export const ItemList = styled.li`
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border-color: darkgray;
-`;
-
-export const EditIcon = styled.img`
-  margin-left: auto;
-
-  height: 50%;
 
   &:hover {
-    cursor: pointer;
-    visibility: visible;
+    ${EditIcon} {
+      visibility: visible;
+    }
   }
 `;
+
+export const InputEdit = styled.input``;
